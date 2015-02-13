@@ -5,7 +5,7 @@ var crypto = require('./crypto')
 Stealth.MAINNET = 42
 Stealth.TESTNET = 43
 
-function Stealth(config) {
+function Stealth (config) {
   this.payloadPubKey = config.payloadPubKey
   this.scanPubKey = config.scanPubKey
 
@@ -21,7 +21,7 @@ Stealth.prototype.toBuffer = function() {
     1, // number of payload keys, only 1 atm
     this.payloadPubKey,
     1, // number of sigs, only 1 atm
-    0, // prefix length, not supported (actually, don't even know what the hell it is)
+    0 // prefix length, not supported (actually, don't even know what the hell it is)
   ])
 }
 
@@ -40,6 +40,8 @@ Stealth.fromBuffer = function(buffer) {
   var pos = 0
   var version = buffer.readUInt8(pos++)
   var options = buffer.readUInt8(pos++)
+  assert.equal(options, 0)
+
   var scanPubKey = buffer.slice(pos, pos += pkLen)
   var nPayloadPubkeys = buffer.readUInt8(pos++)
 
@@ -51,6 +53,10 @@ Stealth.fromBuffer = function(buffer) {
   var nSigs = buffer.readUInt8(pos++)
   var nPrefix = buffer.readUInt8(pos++)
   var prefix = buffer.slice(pos, pos + nPrefix / 8)
+
+  assert.equal(nSigs, 1)
+  assert.equal(nPrefix, 0)
+  assert.equal(prefix.length, 0)
 
   return new Stealth({
     payloadPubKey: payloadPubkeys[0],
@@ -71,7 +77,7 @@ Stealth.fromString = function(str) {
   return Stealth.fromBuffer(payload)
 }
 
-function bconcat(arr) {
+function bconcat (arr) {
   arr = arr.map(function(item) {
     return Buffer.isBuffer(item) ? item : new Buffer([item])
   })
@@ -79,5 +85,3 @@ function bconcat(arr) {
 }
 
 module.exports = Stealth
-
-

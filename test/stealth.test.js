@@ -2,6 +2,8 @@ var assert = require('assert')
 var Stealth = require('../')
 var fixtures = require('./fixtures')
 
+/* global describe, it */
+
 describe('stealth', function() {
   fixtures.valid.forEach(function(f) {
     describe('toString()', function() {
