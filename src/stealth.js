@@ -10,8 +10,13 @@ Stealth.MAINNET = 42
 Stealth.TESTNET = 43
 
 function Stealth (config) {
+  // required
   this.payloadPubKey = config.payloadPubKey
   this.scanPubKey = config.scanPubKey
+
+  // only makes sense if you're the receiver, i.e. you own the stealth addresss
+  this.payloadPrivKey = config.payloadPrivKey
+  this.scanPrivKey = config.scanPrivKey
 
   assert(Buffer.isBuffer(this.payloadPubKey), 'payloadPubKey must be a buffer')
   assert(Buffer.isBuffer(this.scanPubKey), 'scanPubKey must be a buffer')
@@ -91,6 +96,31 @@ Stealth.prototype.genPaymentPubKeyHash = function(senderPrivKey, opts) {
 
   var pubKeyHash = crypto.hash160(E.getEncoded(true))
   return pubKeyHash
+}
+
+// https://gist.github.com/ryanxcharles/1c0f95d0892b4a92d70a
+Stealth.prototype.checkPaymentPubKeyHash = function(opReturnPubKey, pubKeyHashToCompare) {
+  var kdf = crypto.hmacSha256
+
+  var a = this.payloadPrivKey
+  var ap = this.scanPrivKey
+  var B = Point.decodeFrom(ecparams, opReturnPubKey)
+
+  var S = B.multiply(BigInteger.fromBuffer(ap))
+
+  var d = kdf(S.getEncoded(true))
+  var e = BigInteger.fromBuffer(a).add(BigInteger.fromBuffer(d)).mod(ecparams.n)
+
+  var E = ecparams.G.multiply(e)
+
+  var pubKeyHash = crypto.hash160(E.getEncoded(true))
+  if (pubKeyHash.toString('hex') !== pubKeyHashToCompare.toString('hex'))
+    return null
+
+  return {
+    privKey: e.toBuffer(32),
+    pubKey: E.getEncoded(true)
+  }
 }
 
 Stealth.fromString = function(str) {

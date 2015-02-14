@@ -1,5 +1,6 @@
 var assert = require('assert')
 var Stealth = require('../')
+var crypto = require('../src/crypto')
 var fixtures = require('./fixtures')
 
 /* global describe, it */
@@ -29,6 +30,24 @@ describe('stealth', function() {
         var stealth = Stealth.fromString(f.base58)
         var pubKeyHash = stealth.genPaymentPubKeyHash(new Buffer(f.sender.privKey, 'hex'))
         assert.equal(pubKeyHash.toString('hex'), f.paymentPubKeyHash)
+      })
+    })
+
+    describe('checkPaymentPubKeyHash()', function() {
+      it('should check the payment is indeed owned by me', function() {
+        var stealth = new Stealth({
+          payloadPrivKey: new Buffer(f.receiverPayload.privKey, 'hex'),
+          payloadPubKey: new Buffer(f.receiverPayload.pubKey, 'hex'),
+          scanPrivKey: new Buffer(f.receiverScan.privKey, 'hex'),
+          scanPubKey: new Buffer(f.receiverScan.pubKey, 'hex')
+        })
+
+        var res = stealth.checkPaymentPubKeyHash(new Buffer(f.sender.pubKey, 'hex'), new Buffer(f.paymentPubKeyHash, 'hex'))
+        assert(res)
+
+        assert(res.privKey)
+        assert(res.pubKey)
+        assert.equal(crypto.hash160(res.pubKey).toString('hex'), f.paymentPubKeyHash)
       })
     })
   })
