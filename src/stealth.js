@@ -95,6 +95,17 @@ Stealth.prototype.genPaymentPubKeyHash = function(senderPrivKey) {
   return pubKeyHash
 }
 
+Stealth.prototype.genPaymentAddress = function(senderPrivKey, version) {
+  var pubKeyHash = this.genPaymentPubKeyHash(senderPrivKey)
+  var payload = Buffer.concat([new Buffer([version || 0x0]), pubKeyHash])
+  var checksum = crypto.sha256x2(payload).slice(0, 4)
+
+  return bs58.encode(Buffer.concat([
+    payload,
+    checksum
+  ]))
+}
+
 // https://gist.github.com/ryanxcharles/1c0f95d0892b4a92d70a
 Stealth.prototype.checkPaymentPubKeyHash = function(opReturnPubKey, pubKeyHashToCompare) {
   var kdf = crypto.hmacSha256
