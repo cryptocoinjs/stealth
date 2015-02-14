@@ -13,6 +13,9 @@ function Stealth (config) {
   this.payloadPubKey = config.payloadPubKey
   this.scanPubKey = config.scanPubKey
 
+  assert(Buffer.isBuffer(this.payloadPubKey), 'payloadPubKey must be a buffer')
+  assert(Buffer.isBuffer(this.scanPubKey), 'scanPubKey must be a buffer')
+
   // default to bitcoin
   this.version = config.version || Stealth.MAINNET
 }
@@ -67,6 +70,27 @@ Stealth.fromBuffer = function(buffer) {
     scanPubKey: scanPubKey,
     version: version
   })
+}
+
+// https://gist.github.com/ryanxcharles/1c0f95d0892b4a92d70a
+Stealth.prototype.genPaymentPubKeyHash = function(senderPrivKey, opts) {
+  opts = opts || {}
+
+  var kdf = opts.kdf || crypto.hmacSha256
+  var addressVersion = opts.addressVersion || 0x0
+
+  var Ap = Point.decodeFrom(ecparams, this.scanPubKey)
+  var A = Point.decodeFrom(ecparams, this.payloadPubKey)
+
+  var S = Ap.multiply(BigInteger.fromBuffer(senderPrivKey))
+
+  var d = BigInteger.fromBuffer(kdf(S.getEncoded(true)))
+  var D = ecparams.G.multiply(d)
+
+  var E = A.add(D)
+
+  var pubKeyHash = crypto.hash160(E.getEncoded(true))
+  return pubKeyHash
 }
 
 Stealth.fromString = function(str) {

@@ -23,5 +23,13 @@ describe('stealth', function() {
         assert.equal(stealth.payloadPubKey.toString('hex'), f.receiverPayload.pubKey)
       })
     })
+
+    describe('genPaymentPubKeyHash()', function() {
+      it('should generate the payment address for the sender (payer) to send money to', function() {
+        var stealth = Stealth.fromString(f.base58)
+        var pubKeyHash = stealth.genPaymentPubKeyHash(new Buffer(f.sender.privKey, 'hex'))
+        assert.equal(pubKeyHash.toString('hex'), f.paymentPubKeyHash)
+      })
+    })
   })
 })

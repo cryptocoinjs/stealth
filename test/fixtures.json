@@ -15,6 +15,7 @@
         "pubKey": "0266d5c408bb3752c5b2900b04cad54ec98d930c5d6370dcbe45a09a5bc5e083cb"
       },
       "base58": "vJmtuUb8ysKiM1HtHQF23FGfjGAKu5sM94UyyjknqhJHNdj5CZzwtpGzeyaATQ2HvuzomNVtiwsTJSWzzCBgCTtUZbRFpzKVq9MAUr",
+      "paymentPubKeyHash": "3cb64fa6ee9b3e8754e3e2bd033bf61048604a99"
     }
   ]
 }
