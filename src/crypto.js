@@ -10,7 +10,7 @@ function hash160 (buffer) {
   return crypto.createHash('rmd160').update(buffer).digest()
 }
 
-function hmacSha256(buffer) {
+function hmacSha256 (buffer) {
   return crypto.createHmac('sha256', new Buffer([])).update(buffer).digest()
 }
 
