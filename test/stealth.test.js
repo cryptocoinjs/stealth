@@ -12,7 +12,7 @@ describe('stealth', function() {
           payloadPubKey: new Buffer(f.receiverPayload.pubKey, 'hex'),
           scanPubKey: new Buffer(f.receiverScan.pubKey, 'hex')
         })
-        assert.equal(stealth.toString(), f.address)
+        assert.equal(stealth.toString(), f.base58)
       })
     })
 

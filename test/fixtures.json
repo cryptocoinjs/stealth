@@ -14,7 +14,7 @@
         "privKey": "f8c02a45667e1390e9702876dd4dc6c0066e49b5cdaa6ec1c83e7d88be92e2e2",
         "pubKey": "0266d5c408bb3752c5b2900b04cad54ec98d930c5d6370dcbe45a09a5bc5e083cb"
       },
-      "address": "vJmtuUb8ysKiM1HtHQF23FGfjGAKu5sM94UyyjknqhJHNdj5CZzwtpGzeyaATQ2HvuzomNVtiwsTJSWzzCBgCTtUZbRFpzKVq9MAUr"
+      "base58": "vJmtuUb8ysKiM1HtHQF23FGfjGAKu5sM94UyyjknqhJHNdj5CZzwtpGzeyaATQ2HvuzomNVtiwsTJSWzzCBgCTtUZbRFpzKVq9MAUr",
     }
   ]
 }
