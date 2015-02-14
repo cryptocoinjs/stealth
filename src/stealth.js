@@ -78,11 +78,8 @@ Stealth.fromBuffer = function(buffer) {
 }
 
 // https://gist.github.com/ryanxcharles/1c0f95d0892b4a92d70a
-Stealth.prototype.genPaymentPubKeyHash = function(senderPrivKey, opts) {
-  opts = opts || {}
-
-  var kdf = opts.kdf || crypto.hmacSha256
-  var addressVersion = opts.addressVersion || 0x0
+Stealth.prototype.genPaymentPubKeyHash = function(senderPrivKey) {
+  var kdf = crypto.hmacSha256
 
   var Ap = Point.decodeFrom(ecparams, this.scanPubKey)
   var A = Point.decodeFrom(ecparams, this.payloadPubKey)
