@@ -1,6 +1,10 @@
 var assert = require('assert')
 var bs58 = require('bs58')
+var ecurve = require('ecurve')
 var crypto = require('./crypto')
+var ecparams = ecurve.getCurveByName('secp256k1')
+var Point = ecurve.Point
+var BigInteger = crypto.BigInteger
 
 Stealth.MAINNET = 42
 Stealth.TESTNET = 43
