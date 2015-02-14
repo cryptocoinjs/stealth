@@ -1,6 +1,9 @@
 stealth
 =======
 
+[![build status](https://secure.travis-ci.org/cryptocoinjs/stealth.svg)](http://travis-ci.org/cryptocoinjs/stealth)
+[![Coverage Status](https://img.shields.io/coveralls/cryptocoinjs/stealth.svg)](https://coveralls.io/r/cryptocoinjs/stealth)
+
 This module is used for stealth addresses for Bitcoin and other crypto currencies.
 
 
