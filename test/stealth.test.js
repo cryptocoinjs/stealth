@@ -1,6 +1,6 @@
 var assert = require('assert')
 var Stealth = require('../')
-var crypto = require('../src/crypto')
+var crypto = require('../lib/crypto')
 var fixtures = require('./fixtures')
 
 /* global describe, it */
