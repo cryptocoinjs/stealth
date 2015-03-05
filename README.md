@@ -4,6 +4,8 @@ stealth
 [![build status](https://secure.travis-ci.org/cryptocoinjs/stealth.svg)](http://travis-ci.org/cryptocoinjs/stealth)
 [![Coverage Status](https://img.shields.io/coveralls/cryptocoinjs/stealth.svg)](https://coveralls.io/r/cryptocoinjs/stealth)
 
+[![js-standard-style](https://raw.githubusercontent.com/feross/standard/master/badge.png)](https://github.com/feross/standard)
+
 This module is used for stealth addresses for Bitcoin and other crypto currencies.
 
 
