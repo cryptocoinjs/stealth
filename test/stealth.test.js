@@ -5,10 +5,10 @@ var fixtures = require('./fixtures')
 
 /* global describe, it */
 
-describe('stealth', function() {
-  fixtures.valid.forEach(function(f) {
-    describe('toString()', function() {
-      it('should convert to base58-check string', function() {
+describe('stealth', function () {
+  fixtures.valid.forEach(function (f) {
+    describe('toString()', function () {
+      it('should convert to base58-check string', function () {
         var stealth = new Stealth({
           payloadPubKey: new Buffer(f.receiverPayload.pubKey, 'hex'),
           scanPubKey: new Buffer(f.receiverScan.pubKey, 'hex')
@@ -17,32 +17,32 @@ describe('stealth', function() {
       })
     })
 
-    describe('fromString()', function() {
-      it('should convert from base58-check string to object', function() {
+    describe('fromString()', function () {
+      it('should convert from base58-check string to object', function () {
         var stealth = Stealth.fromString(f.base58)
         assert.equal(stealth.scanPubKey.toString('hex'), f.receiverScan.pubKey)
         assert.equal(stealth.payloadPubKey.toString('hex'), f.receiverPayload.pubKey)
       })
     })
 
-    describe('genPaymentPubKeyHash()', function() {
-      it('should generate the payment pubkeyhash for the sender (payer) to send money to', function() {
+    describe('genPaymentPubKeyHash()', function () {
+      it('should generate the payment pubkeyhash for the sender (payer) to send money to', function () {
         var stealth = Stealth.fromString(f.base58)
         var pubKeyHash = stealth.genPaymentPubKeyHash(new Buffer(f.sender.privKey, 'hex'))
         assert.equal(pubKeyHash.toString('hex'), f.paymentPubKeyHash)
       })
     })
 
-    describe('genPaymentAddress()', function() {
-      it('should generate the payment address for the sender', function() {
+    describe('genPaymentAddress()', function () {
+      it('should generate the payment address for the sender', function () {
         var stealth = Stealth.fromString(f.base58)
         var address = stealth.genPaymentAddress(new Buffer(f.sender.privKey, 'hex'))
         assert.equal(address, f.paymentAddress)
       })
     })
 
-    describe('checkPaymentPubKeyHash()', function() {
-      it('should check the payment is indeed owned by me', function() {
+    describe('checkPaymentPubKeyHash()', function () {
+      it('should check the payment is indeed owned by me', function () {
         var stealth = new Stealth({
           payloadPrivKey: new Buffer(f.receiverPayload.privKey, 'hex'),
           payloadPubKey: new Buffer(f.receiverPayload.pubKey, 'hex'),
@@ -59,8 +59,8 @@ describe('stealth', function() {
       })
     })
 
-    describe('toJSON()', function() {
-      it('should convert to JSON string', function() {
+    describe('toJSON()', function () {
+      it('should convert to JSON string', function () {
         var stealth = new Stealth({
           payloadPrivKey: new Buffer(f.receiverPayload.privKey, 'hex'),
           payloadPubKey: new Buffer(f.receiverPayload.pubKey, 'hex'),
@@ -71,8 +71,8 @@ describe('stealth', function() {
         assert.equal(stealth.toJSON(), f.JSON)
       })
 
-      describe('when > only pub (sender)', function() {
-        it('should convert to JSON string', function() {
+      describe('when > only pub (sender)', function () {
+        it('should convert to JSON string', function () {
           var stealth = new Stealth({
             payloadPubKey: new Buffer(f.receiverPayload.pubKey, 'hex'),
             scanPubKey: new Buffer(f.receiverScan.pubKey, 'hex')
@@ -83,8 +83,8 @@ describe('stealth', function() {
       })
     })
 
-    describe('fromJSON()', function() {
-      it('should parse from JSON', function() {
+    describe('fromJSON()', function () {
+      it('should parse from JSON', function () {
         var stealth1 = Stealth.fromJSON(f.JSON)
         assert.equal(stealth1.toJSON(), f.JSON)
         assert.equal(stealth1.toString(), f.base58)
