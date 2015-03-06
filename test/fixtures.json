@@ -15,6 +15,8 @@
         "pubKey": "0266d5c408bb3752c5b2900b04cad54ec98d930c5d6370dcbe45a09a5bc5e083cb"
       },
       "base58": "vJmtuUb8ysKiM1HtHQF23FGfjGAKu5sM94UyyjknqhJHNdj5CZzwtpGzeyaATQ2HvuzomNVtiwsTJSWzzCBgCTtUZbRFpzKVq9MAUr",
+      "JSON": "{\n  \"payloadPrivKey\": \"f67213b122a5d442d2b93bda8cc45c564a70ec5d2a4e0e95bb585cf199869c98\",\n  \"payloadPubKey\": \"0362408459041e0473298af3824dbabe4d2b7f846825ed4d1c2e2c670c07cb275d\",\n  \"scanPrivKey\": \"dec2e4bc4992314a9c9a51bbd859e1b081b74178818c53c19d18d6f761f5d804\",\n  \"scanPubKey\": \"02697763d7e9becb0c180083738c32c05b0e2fee26d6278020c06bbb04d5f66b32\",\n  \"version\": 42\n}",
+      "JSONpub": "{\n  \"payloadPubKey\": \"0362408459041e0473298af3824dbabe4d2b7f846825ed4d1c2e2c670c07cb275d\",\n  \"scanPubKey\": \"02697763d7e9becb0c180083738c32c05b0e2fee26d6278020c06bbb04d5f66b32\",\n  \"version\": 42\n}",
       "paymentPubKeyHash": "3cb64fa6ee9b3e8754e3e2bd033bf61048604a99",
       "paymentAddress": "16Y1wiBLH4QVgM38vNwhB2ccTLQm5P7WNh"
     }

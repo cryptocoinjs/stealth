@@ -58,5 +58,29 @@ describe('stealth', function() {
         assert.equal(crypto.hash160(res.pubKey).toString('hex'), f.paymentPubKeyHash)
       })
     })
+
+    describe('toJSON()', function() {
+      it('should convert to JSON string', function() {
+        var stealth = new Stealth({
+          payloadPrivKey: new Buffer(f.receiverPayload.privKey, 'hex'),
+          payloadPubKey: new Buffer(f.receiverPayload.pubKey, 'hex'),
+          scanPrivKey: new Buffer(f.receiverScan.privKey, 'hex'),
+          scanPubKey: new Buffer(f.receiverScan.pubKey, 'hex')
+        })
+
+        assert.equal(stealth.toJSON(), f.JSON)
+      })
+
+      describe('when > only pub (sender)', function() {
+        it('should convert to JSON string', function() {
+          var stealth = new Stealth({
+            payloadPubKey: new Buffer(f.receiverPayload.pubKey, 'hex'),
+            scanPubKey: new Buffer(f.receiverScan.pubKey, 'hex')
+          })
+
+          assert.equal(stealth.toJSON(), f.JSONpub)
+        })
+      })
+    })
   })
 })
