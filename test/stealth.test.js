@@ -82,5 +82,17 @@ describe('stealth', function() {
         })
       })
     })
+
+    describe('fromJSON()', function() {
+      it('should parse from JSON', function() {
+        var stealth1 = Stealth.fromJSON(f.JSON)
+        assert.equal(stealth1.toJSON(), f.JSON)
+        assert.equal(stealth1.toString(), f.base58)
+
+        var stealth2 = Stealth.fromJSON(f.JSONpub)
+        assert.equal(stealth2.toJSON(), f.JSONpub)
+        assert.equal(stealth2.toString(), f.base58)
+      })
+    })
   })
 })
