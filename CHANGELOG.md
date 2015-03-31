@@ -1,3 +1,7 @@
+0.2.1 / 2015-03-31
+------------------
+- return `null` for `checkPaymentPubKeyHash()` if `OP_RETURN` payload is not 33 bytes
+
 0.2.0 / 2015-03-05
 ------------------
 - added `Stealth.prototype.toJSON()` and `Stealth.fromJSON()`
