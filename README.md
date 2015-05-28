@@ -91,6 +91,18 @@ if (keypair == null) {
 }
 ```
 
+API
+---
+
+(TODO)
+
+### + fromRandom([config])
+
+Class method to create a stealth key from a random entropy. Optionally pass in `config` with the following:
+- `rng`: A function that should accept a number `n` and return a `Buffer`/`Array` with length `n`.
+- `version`: Version code for stealth string.
+
+
 
 Resources
 ---------

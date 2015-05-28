@@ -25,6 +25,49 @@ describe('stealth', function () {
       })
     })
 
+    describe('fromRandom()', function () {
+      it('should create a random stealth key', function () {
+        var stealth = Stealth.fromRandom()
+        assert(stealth.toString())
+        assert.strictEqual(stealth.version, 42)
+      })
+
+      describe('> when rng is passed', function () {
+        it('should return a stealth key using the new rng', function () {
+          var stealth = Stealth.fromRandom({
+            rng: function () {
+              // return as Buffer
+              return new Buffer('5873d4af699b9a35cca3d38219a13184c616e5d433c99ff39353687d4736ac1d', 'hex')
+            }
+          })
+          assert.strictEqual(stealth.scanPrivKey.toString('hex'), '5873d4af699b9a35cca3d38219a13184c616e5d433c99ff39353687d4736ac1d')
+          assert.strictEqual(stealth.payloadPrivKey.toString('hex'), '5873d4af699b9a35cca3d38219a13184c616e5d433c99ff39353687d4736ac1d')
+          assert.strictEqual(stealth.scanPubKey.toString('hex'), '02a8001c07fabf92175cb93f35df6d4d5f6cba8f35c9e080558bc44eedd95c2568')
+          assert.strictEqual(stealth.payloadPubKey.toString('hex'), '02a8001c07fabf92175cb93f35df6d4d5f6cba8f35c9e080558bc44eedd95c2568')
+
+          var stealth2 = Stealth.fromRandom({
+            rng: function () {
+              // return as Array
+              return [].slice.call(new Buffer('9f817a572bd5e89fe0b98c771de29de5ce1720e83fd43fc8d57de2db328b9d1a', 'hex'))
+            }
+          })
+          assert.strictEqual(stealth2.scanPrivKey.toString('hex'), '9f817a572bd5e89fe0b98c771de29de5ce1720e83fd43fc8d57de2db328b9d1a')
+          assert.strictEqual(stealth2.payloadPrivKey.toString('hex'), '9f817a572bd5e89fe0b98c771de29de5ce1720e83fd43fc8d57de2db328b9d1a')
+          assert.strictEqual(stealth2.scanPubKey.toString('hex'), '0393b6e74a36b1c9769acd749ed18d82457b52d78f00def709f03c526ae895d7c1')
+          assert.strictEqual(stealth2.payloadPubKey.toString('hex'), '0393b6e74a36b1c9769acd749ed18d82457b52d78f00def709f03c526ae895d7c1')
+        })
+      })
+
+      describe('> when version is passed', function () {
+        it('should use the new version number', function () {
+          var stealth = Stealth.fromRandom({
+            version: 5
+          })
+          assert.strictEqual(stealth.version, 5)
+        })
+      })
+    })
+
     describe('genPaymentPubKeyHash()', function () {
       it('should generate the payment pubkeyhash for the sender (payer) to send money to', function () {
         var stealth = Stealth.fromString(f.base58)
