@@ -1,3 +1,7 @@
+0.3.0 / 2015-05-28
+------------------
+- added `fromRandom([config])`
+
 0.2.1 / 2015-03-31
 ------------------
 - return `null` for `checkPaymentPubKeyHash()` if `OP_RETURN` payload is not 33 bytes
