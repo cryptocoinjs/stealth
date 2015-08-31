@@ -1,3 +1,8 @@
+0.4.0 / 2015-08-31
+------------------
+- `toJSON()` returns an object instead of a string
+- `fromJSON()` accepts either object or string
+
 0.3.0 / 2015-05-28
 ------------------
 - added `fromRandom([config])`

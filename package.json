@@ -1,6 +1,6 @@
 {
   "name": "stealth",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Stealth addresses for Bitcoin and other crypto currencies.",
   "main": "lib/stealth.js",
   "directories": {
