@@ -4,6 +4,7 @@ var crypto = require('../lib/crypto')
 var fixtures = require('./fixtures')
 
 /* global describe, it */
+// trinity: mocha
 
 describe('stealth', function () {
   fixtures.valid.forEach(function (f) {
@@ -111,7 +112,7 @@ describe('stealth', function () {
           scanPubKey: new Buffer(f.receiverScan.pubKey, 'hex')
         })
 
-        assert.equal(stealth.toJSON(), f.JSON)
+        assert.deepEqual(stealth.toJSON(), JSON.parse(f.JSON))
       })
 
       describe('when > only pub (sender)', function () {
@@ -121,7 +122,7 @@ describe('stealth', function () {
             scanPubKey: new Buffer(f.receiverScan.pubKey, 'hex')
           })
 
-          assert.equal(stealth.toJSON(), f.JSONpub)
+          assert.deepEqual(stealth.toJSON(), JSON.parse(f.JSONpub))
         })
       })
     })
