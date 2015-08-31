@@ -130,11 +130,15 @@ describe('stealth', function () {
     describe('fromJSON()', function () {
       it('should parse from JSON', function () {
         var stealth1 = Stealth.fromJSON(f.JSON)
-        assert.equal(stealth1.toJSON(), f.JSON)
+        var stealth1o = Stealth.fromJSON(JSON.parse(f.JSON))
+        assert.equal(JSON.stringify(stealth1.toJSON(), null, 2), f.JSON)
+        assert.deepEqual(stealth1o.toJSON(), JSON.parse(f.JSON))
         assert.equal(stealth1.toString(), f.base58)
 
         var stealth2 = Stealth.fromJSON(f.JSONpub)
-        assert.equal(stealth2.toJSON(), f.JSONpub)
+        var stealth2o = Stealth.fromJSON(JSON.parse(f.JSONpub))
+        assert.equal(JSON.stringify(stealth2.toJSON(), null, 2), f.JSONpub)
+        assert.deepEqual(stealth2o.toJSON(), JSON.parse(f.JSONpub))
         assert.equal(stealth2.toString(), f.base58)
       })
     })
